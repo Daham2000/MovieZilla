@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Grow } from "@material-ui/core";
 import GuestView from "./components/GuestView/GuestView";
 import Footer from "./components/Footer/footer";
 
@@ -34,6 +33,8 @@ import {BrowserRouter,
   Link } from "react-router-dom";
 
 import SignUp from "./components/Signup/Signup";
+import logo from './images/logo_transparent.png';
+
 
 const drawerWidth = 240;
 
@@ -88,6 +89,15 @@ const useStyles = makeStyles((theme) => ({
   link:{
     textDecoration: "none",
     color: "white"
+  },
+  sectionDrawer:{
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyItems: 'flex-start'
+  },
+  imgs:{
+    width:150
   }
 
 }));
@@ -110,7 +120,6 @@ function App() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
 
   return (
      
@@ -140,27 +149,9 @@ function App() {
               Signup
           </Button>
         </Link>
-            
          
         </Toolbar>
       </AppBar>
-
-    <Grow in>
-    <Switch>
-          <Route exact path="/">
-            <GuestView />
-            <Footer/>
-          </Route>
-          <Route path="/signup">
-            <SignUp />
-            <Footer/>
-          </Route>  
-      </Switch>
-    </Grow>
-
-      
-
-    </BrowserRouter>
 
       <Drawer
         className={classes.drawer}
@@ -177,26 +168,48 @@ function App() {
           </IconButton>
         </div>
         <Divider />
+
         <List>
-          {['Home', 'Movies', 'Tv series', 'Hollyhood News'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{
-                index===0 ? <HomeIcon /> : index===1 ? <MovieIcon /> : 
-              index===2 ? <TvIcon /> : <MoviecIcon/> }</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        <ListItem button component={Link} to="/">
+          <ListItemIcon><HomeIcon /></ListItemIcon>
+          <ListItemText>Home</ListItemText>
+        </ListItem>
+        <ListItem button component={Link} to="/">
+          <ListItemIcon><MovieIcon /></ListItemIcon>
+          <ListItemText>Movies</ListItemText>
+        </ListItem>
+        <ListItem button component={Link} to="/">
+          <ListItemIcon><TvIcon /></ListItemIcon>
+          <ListItemText>Tv series</ListItemText>
+        </ListItem>
+        <ListItem button component={Link} to="/">
+          <ListItemIcon><MovieIcon /></ListItemIcon>
+          <ListItemText>Hoillyhood Movies</ListItemText>
+        </ListItem>
+      </List>
+
+        
         <Divider />
-        <List>
-          {['Latest News', 'Popular in last month', 'Box office Movies'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List>
+        
+
+        <div className={classes.sectionDrawer}>
+            <img alt="Logo" src={logo} className={classes.imgs}></img>
+        </div>
+
       </Drawer>
+
+      <Switch>
+          <Route exact path="/">
+            <GuestView />
+            <Footer/>
+          </Route>
+          <Route exact path="/signup">
+            <SignUp />
+            <Footer/>
+          </Route>  
+      </Switch>
+
+    </BrowserRouter>
 
     </div>
 
