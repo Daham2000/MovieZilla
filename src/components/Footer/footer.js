@@ -35,7 +35,7 @@ const Footer = () =>{
 
     return(
         <div>
-            <Typography className={styles.footerSection} component="div" style={{ backgroundColor: '#29528F', marginTop: '25px' , height: '300px', width:'100%' }} >
+            <Typography className={styles.footerSection} component="div" style={{ backgroundColor: '#29528F', marginTop: '25px' , height: '305px', width:'100%' }} >
                 <div className={styles._2ndsection}>
                     <p style={{color: 'white', marginRight: "25px"}}>+94778899555</p>
                     <Button variant="contained" style={{backgroundColor: "#D45E08", color: "white", height: "40px"}}>

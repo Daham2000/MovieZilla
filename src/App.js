@@ -6,9 +6,11 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
-import { Grid, Grow } from "@material-ui/core";
+import { Grow } from "@material-ui/core";
 import GuestView from "./components/GuestView/GuestView";
 import Footer from "./components/Footer/footer";
+
+import ReactDOM from "react-dom";
 
 import { useTheme } from '@material-ui/core/styles';
 import Drawer from '@material-ui/core/Drawer';
@@ -26,7 +28,12 @@ import MovieIcon from '@material-ui/icons/Movie';
 import TvIcon from '@material-ui/icons/Tv';
 import MoviecIcon from '@material-ui/icons/MovieCreation';
 
-import { useHistory } from "react-router-dom";
+import {BrowserRouter, 
+  Switch,
+  Route,
+  Link } from "react-router-dom";
+
+import SignUp from "./components/Signup/Signup";
 
 const drawerWidth = 240;
 
@@ -78,15 +85,16 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
+  link:{
+    textDecoration: "none",
+    color: "white"
+  }
 
 }));
 
 
 function App() {
   const classes = useStyles();
-
-  const history = useHistory();
-  const navigateTo = () => history.push("/Signup");
 
   useEffect(() => {
     document.title = "Welcome to MovieZilla"
@@ -107,6 +115,9 @@ function App() {
   return (
      
     <div className={classes.root}>
+
+    <BrowserRouter>
+
       <AppBar position="static">
         <Toolbar>
           <IconButton
@@ -119,13 +130,37 @@ function App() {
           </Typography>
           <Button 
             color="inherit">Login</Button>
+
+
+        <Link to="/signup" className={classes.link}>
           <Button 
             className={classes.appbarbtn} 
             color="inherit"
-            onClick={navigateTo} 
-            type="button">Signup</Button>
+            type="button">
+              Signup
+          </Button>
+        </Link>
+            
+         
         </Toolbar>
       </AppBar>
+
+    <Grow in>
+    <Switch>
+          <Route exact path="/">
+            <GuestView />
+            <Footer/>
+          </Route>
+          <Route path="/signup">
+            <SignUp />
+            <Footer/>
+          </Route>  
+      </Switch>
+    </Grow>
+
+      
+
+    </BrowserRouter>
 
       <Drawer
         className={classes.drawer}
@@ -163,20 +198,11 @@ function App() {
         </List>
       </Drawer>
 
-      <Grow in>
-          <Grid container> 
-              <Grid item xs={12}>
-                  <GuestView />
-              </Grid>
-          </Grid>
-      </Grow>
-
-      <Grid item xs={12}>
-          <Footer />
-      </Grid>
     </div>
 
   );
 }
-
+ReactDOM.render(App, document.getElementById('root'));
 export default App;
+
+

@@ -1,5 +1,7 @@
 import { Typography, makeStyles,Grid, Button } from "@material-ui/core";
 import logo from '../../images/logo_transparent.png';
+import {
+    Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     guestViewMainTopic: {
@@ -111,13 +113,12 @@ const GuestView = () => {
         </div>
 
             <div className={classes.btnSection}>
+            <Link to="/signup" className={classes.link}>
                 <Button variant="contained" color="primary" disableElevation>
                     Register Now
                 </Button>
+            </Link>
             </div>
-
-
-
         
     </div>
         

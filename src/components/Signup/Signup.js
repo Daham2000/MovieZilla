@@ -1,8 +1,42 @@
-import { makeStyles,Typography } from "@material-ui/core";
+import { makeStyles, Card, CardContent,Typography, TextField,Button, Link } from "@material-ui/core";
+import logo from  "../../images/logo_transparent.png";
 
 const useStyles = makeStyles((theme) => ({
     mainSection:{
-        display: 'flex'
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyItems: 'center'
+    },
+    img: {
+        width: 300
+    },
+    root: {
+        minWidth: 400,
+        display: 'flex',
+        flexDirection: "column",
+        alignItems: "space-between"
+    },
+    bullet: {
+        display: 'inline-block',
+        margin: '0 2px',
+        transform: 'scale(0.8)',
+    },
+    title: {
+        fontSize: 25,
+        fontWeight: "bold",
+        marginBottom: 25
+    },
+    title2: {
+        fontSize: 15,
+        marginBottom: 15
+    },
+    textFiled: {
+        marginBottom: 15
+    },
+    button:{
+        borderRadius: 15,
+        marginBottom: 20
     }
 }));
 
@@ -11,7 +45,29 @@ const Signup = () =>{
 
     return (
         <div className={styles.mainSection}>
-            <Typography component="div" style={{ backgroundColor: '#cfe8fc', height: '100vh' }} />
+            <img src={logo} alt="logo" className={styles.img}></img>
+            <Card >
+                <CardContent className={styles.root}>
+                    <Typography
+                    Typography className={styles.title} color="textSecondary" gutterBottom>
+                        Create your account
+                    </Typography>
+
+                    <TextField id="name" className={styles.textFiled} label="Your name:" variant="outlined" />
+                    <TextField id="email" className={styles.textFiled} label="Email:" variant="outlined" />
+                    <TextField id="Password" type="password" className={styles.textFiled} label="Password:" variant="outlined" />
+                    <TextField id="PasswordRepeat" type="password" className={styles.textFiled} label="Password repeat:" variant="outlined" />
+                    
+                    <Button className={styles.button} variant="contained" color="primary" href="#contained-buttons">
+                        Create your MovieZilla Account
+                    </Button>
+
+                    <Typography
+                    Typography className={styles.title2} color="black" gutterBottom>
+                        Do you already have an account? <Link> Login </Link> 
+                    </Typography>
+                </CardContent>
+            </Card>
         </div>
     )
 }
