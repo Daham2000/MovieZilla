@@ -1,5 +1,6 @@
-import { makeStyles, Card, CardContent,Typography, TextField,Button, Link } from "@material-ui/core";
+import { makeStyles, Card, CardContent,Typography, TextField,Button } from "@material-ui/core";
 import logo from  "../../images/logo_transparent.png";
+import { Link } from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     mainSection:{
@@ -29,7 +30,8 @@ const useStyles = makeStyles((theme) => ({
     },
     title2: {
         fontSize: 15,
-        marginBottom: 15
+        marginBottom: 15,
+        textDecoration: "none"
     },
     textFiled: {
         marginBottom: 15
@@ -64,7 +66,7 @@ const Signup = () =>{
 
                     <Typography
                     Typography className={styles.title2} color="black" gutterBottom>
-                        Do you already have an account? <Link> Login </Link> 
+                        Do you already have an account? <Link to="/login" className={styles.title2}> Login </Link> 
                     </Typography>
                 </CardContent>
             </Card>

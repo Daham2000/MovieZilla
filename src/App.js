@@ -8,6 +8,7 @@ import {BrowserRouter,
   Route } from "react-router-dom";
 import SignUp from "./components/Signup/Signup";
 import AppBar from './components/App_bar/app_bar';
+import Login from './components/Login/Login';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +40,12 @@ function App() {
             <AppBar />
             <SignUp />
             <Footer/>
-          </Route>  
+          </Route>
+          <Route exact path="/login">
+            <AppBar />
+            <Login />
+            <Footer/>
+          </Route>    
       </Switch>
 
     </BrowserRouter>

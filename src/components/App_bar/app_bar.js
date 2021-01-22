@@ -113,7 +113,10 @@ const App_bar = () => {
           <Typography variant="h5" className={classes.title}>
             MovieZilla
           </Typography>
-          <Button color="inherit">Login</Button>
+
+          <Link to="/login" className={classes.link}>
+              <Button color="inherit" type="button">Login</Button>
+          </Link>
 
           <Link to="/signup" className={classes.link}>
             <Button className={classes.appbarbtn} color="inherit" type="button">
