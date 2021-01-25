@@ -11,6 +11,9 @@ import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { signup } from "../../action/users";
+import {toast} from "react-toastify";
+
+toast.configure()
 const useStyles = makeStyles((theme) => ({
   mainSection: {
     display: "flex",
@@ -60,10 +63,8 @@ const Signup = () => {
     username: "",
     Email: "",
     password: "",
+    password2: "",
     birthDay: "",
-  });
-  const [validatedPassword, setValidate] = useState({
-    password: "",
   });
 
   const dispatch = useDispatch();
@@ -144,9 +145,9 @@ const Signup = () => {
               className={styles.textFiled}
               label="Password repeat:"
               variant="outlined"
-              value={validatedPassword.password}
+              value={userData.password2}
               onChange={(e) =>
-                setValidate({ ...validatedPassword, password: e.target.value})  
+                setUserdata({ ...userData, password2: e.target.value})  
               }
             />
 
