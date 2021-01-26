@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { login } from "../../action/users";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -68,8 +69,12 @@ const Login = () => {
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
+    if (userData.email==="" | userData.password==="") {
+      toast.info( "Please fill out all fields", {position: toast.POSITION.BOTTOM_RIGHT});
+    }else{
+      dispatch(login(userData));
+    }
     e.preventDefault();
-    dispatch(login(userData));
   };
 
   return (

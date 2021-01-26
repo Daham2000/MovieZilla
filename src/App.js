@@ -9,6 +9,7 @@ import {BrowserRouter,
 import SignUp from "./components/Signup/Signup";
 import AppBar from './components/App_bar/app_bar';
 import Login from './components/Login/Login';
+import Home from './components/Home/Home';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,6 +45,11 @@ function App() {
           <Route exact path="/login">
             <AppBar />
             <Login />
+            <Footer/>
+          </Route>    
+          <Route exact path="/home">
+            <AppBar />
+            <Home />
             <Footer/>
           </Route>    
       </Switch>

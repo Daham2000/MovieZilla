@@ -8,7 +8,7 @@ toast.configure();
 const notify = (data) => {
     if (data.isRegistered===true) {
         toast.success( data.message, {
-            position: "top-center",
+            position: "bottom-right",
             autoClose: 3000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -19,7 +19,7 @@ const notify = (data) => {
     }
     if (data.isRegistered===false){
         toast.error(data.message, {
-            position: "top-center",
+            position: "bottom-right",
             autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
@@ -28,7 +28,7 @@ const notify = (data) => {
             progress: undefined,
         });
     }else{
-        toast.info(data.isRegistered, {position: toast.POSITION.TOP_CENTER});
+        toast.info(data.isRegistered, {position: toast.POSITION.BOTTOM_RIGHT});
     }
 };
 

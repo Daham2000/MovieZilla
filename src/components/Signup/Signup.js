@@ -8,12 +8,14 @@ import {
 } from "@material-ui/core";
 import logo from "../../images/logo_transparent.png";
 import { Link } from "react-router-dom";
-import React, { useState, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { signup } from "../../action/users";
-import {toast} from "react-toastify";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
-toast.configure()
+toast.configure();
+
 const useStyles = makeStyles((theme) => ({
   mainSection: {
     display: "flex",
@@ -71,7 +73,16 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(signup(userData));
+
+    if (userData.username==="" | userData.Email==="" | userData.password==="" | userData.password2==="" | userData.birthDay==="") {
+      toast.info( "Please fill out all fields", {position: toast.POSITION.BOTTOM_RIGHT});
+    }else{
+      if (userData.password!==userData.password2) {
+        toast.info( "Password didn't match", {position: toast.POSITION.BOTTOM_RIGHT});
+      }else{
+        dispatch(signup(userData));
+      }
+    }
   };
 
   return (
