@@ -8,7 +8,7 @@ import {
 } from "@material-ui/core";
 import logo from "../../images/logo_transparent.png";
 import { Link } from "react-router-dom";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { signup } from "../../action/users";
 import { toast } from "react-toastify";
@@ -84,6 +84,10 @@ const Signup = () => {
       }
     }
   };
+
+  useEffect(() => {
+    document.title = "Signup with MovieZilla";
+  });
 
   return (
     <div className={styles.mainSection}>

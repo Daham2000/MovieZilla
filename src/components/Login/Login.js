@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { login } from "../../action/users";
 import { useState } from "react";
 import { toast } from "react-toastify";
+import React, { useEffect } from 'react';
 
 const useStyles = makeStyles((theme) => ({
   mainSection: {
@@ -76,6 +77,10 @@ const Login = () => {
     }
     e.preventDefault();
   };
+
+  useEffect(() => {
+    document.title = "Login with MovieZilla";
+  });
 
   return (
     <div className={classes.mainSection}>

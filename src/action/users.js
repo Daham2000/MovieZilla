@@ -2,6 +2,7 @@ import * as api from "../api/index";
 import { SIGNUP,LOGIN } from "../constants/actionType";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import UserStore from "../stores/UserStore";
 
 toast.configure();
 
@@ -32,6 +33,8 @@ const notify = (data) => {
     }
 };
 
+
+
 export const signup = (user) => async (dispatch) => {
   try {
     const { data } = await api.registerUser(user);
@@ -45,6 +48,16 @@ export const signup = (user) => async (dispatch) => {
 export const login = (user) => async (dispatch) =>{
   try {
     const {data} = await api.loginUser(user);
+    if(data.isRegistered===true){
+      UserStore.isLoggedin = true;
+      UserStore.email = user.email;
+      const userData= JSON.parse(data.data);
+      UserStore.userName = userData.name;
+    }else{
+      UserStore.isLoggedin = false;
+      UserStore.email = "";
+      UserStore.userName = "";
+    }
     notify(data);
     dispatch({type: LOGIN, payload: data});
   } catch (error) {

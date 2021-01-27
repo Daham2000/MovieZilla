@@ -7,12 +7,16 @@ import { Provider } from "react-redux";
 import { createStore, applyMiddleware, compose } from "redux";
 import reducers from './reducers/index';
 import thunk from "redux-thunk";
+import { CookiesProvider } from 'react-cookie';
 
 const store=createStore(reducers, compose(applyMiddleware(thunk)))
 
 ReactDOM.render(
+ 
   <Provider store={store}>
-     <App />
+  <CookiesProvider>
+      <App />
+  </CookiesProvider>
   </Provider>,
   document.getElementById('root'),
 );

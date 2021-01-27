@@ -19,8 +19,10 @@ import HomeIcon from '@material-ui/icons/Home';
 import MovieIcon from '@material-ui/icons/Movie';
 import TvIcon from '@material-ui/icons/Tv';
 import logo from '../../images/logo_transparent.png';
-
+import { useHistory } from "react-router-dom"; 
 import MenuIcon from '@material-ui/icons/Menu';
+import UserStore from "../../stores/UserStore";
+
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme) => ({
@@ -89,6 +91,9 @@ const App_bar = () => {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
 
+  const history = useHistory();
+  const navigateTo = (path) => history.push(`/${path}`);
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -97,7 +102,20 @@ const App_bar = () => {
     setOpen(false);
   };
 
+  
+
+  const handleAuth = () => {
+  
+    if(UserStore.isLoggedin===true) {
+      navigateTo("");
+    } else {
+      navigateTo("login");
+    }
+
+  }
+
   return (
+    
     <div>
       <AppBar position="static">
         <Toolbar>
@@ -114,8 +132,8 @@ const App_bar = () => {
             MovieZilla
           </Typography>
 
-          <Link to="/login" className={classes.link}>
-              <Button color="inherit" type="button">Login</Button>
+          <Link className={classes.link}>
+              <Button id="logBtn" onClick={handleAuth} color="inherit" type="button">Login</Button>
           </Link>
 
           <Link to="/signup" className={classes.link}>
