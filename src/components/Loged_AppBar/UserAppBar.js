@@ -139,12 +139,6 @@ export default function UserAppBar() {
               Logout
             </Button>
           </Link>
-
-          <Link to="/signup" className={classes.link}>
-            <Button className={classes.appbarbtn} color="inherit" type="button">
-              Signup
-            </Button>
-          </Link>
         </Toolbar>
       </AppBar>
 

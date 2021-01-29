@@ -1,12 +1,27 @@
-import React, { Component } from 'react';
-import {  } from "@material-ui/core";
+import React, { } from "react";
+import {Grow,Container} from "@material-ui/core";
+import { makeStyles } from '@material-ui/core/styles';
 
-export default class Home extends Component {
-    render() {
-        return (
-            <div>
-            
-            </div>
-        )
-    }
+makeStyles((theme) => ({
+  mainContainer: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  actionDiv: {
+    textAlign: 'center',
+    marginBottom: 2
+  },
+}));
+export default function Home() {
+  const classes=makeStyles();
+
+  return (
+    <div>
+    <Grow in>
+            <Container className={classes.mainContainer}>
+                  <p className={classes.actionDiv}>Latest Posts</p>
+            </Container>
+        </Grow>
+    </div>
+  );
 }

@@ -7,13 +7,17 @@ import { BrowserRouter, Switch, Link, Route } from "react-router-dom";
 import SignUp from "./components/Signup/Signup";
 import AppBar from "./components/App_bar/app_bar";
 import Login from "./components/Login/Login";
-import Home from "./components/Home/Home";
 import UserStore from "./stores/UserStore";
 import { observer } from "mobx-react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Button from "@material-ui/core/Button";
 import UserAppBar from "./components/Loged_AppBar/UserAppBar";
 import CacheRoute, { CacheSwitch } from "react-router-cache-route";
+import { useDispatch } from "react-redux";
+import { getPosts } from "./action/users";
+import { Grow, Grid, Container } from "@material-ui/core";
+import Posts from "./components/Posts/Posts";
+import Home from './components/Home/Home';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -33,12 +37,23 @@ const useStyles = makeStyles((theme) => ({
 
 function App() {
   const classes = useStyles();
+  const [currentId, setcurrentId] = useState(null);
 
   useEffect(() => {
     document.title = "Welcome to MovieZilla - Movie Reviews and rates";
   }, []);
 
   const [hidden, setHidden] = useState(false);
+  const dispatch = useDispatch();
+
+  const handleContinue = (e) => {
+    setHidden(!hidden);
+    dispatch(getPosts());
+  };
+
+  useEffect(() => {
+    dispatch(getPosts());
+  }, [currentId, dispatch]);
 
   if (UserStore.loading === true) {
     return (
@@ -53,19 +68,19 @@ function App() {
           <BrowserRouter>
             <CacheSwitch>
               <div hidden={hidden}>
-              <CacheRoute>
-                <Link to="/home" className={classes.link}>
-                  <p hidden={hidden}> &nbsp; Hello, {UserStore.userName}</p>
-                  <p hidden={hidden}>Your login operation is successful</p>
-                  <p hidden={hidden}>Please Press Continue</p>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => setHidden(!hidden)}
-                  >
-                    Continue
-                  </Button>
-                </Link>
+                <CacheRoute>
+                  <Link to="/home" className={classes.link}>
+                    <p hidden={hidden}> &nbsp; Hello, {UserStore.userName}</p>
+                    <p hidden={hidden}>Your login operation is successful</p>
+                    <p hidden={hidden}>Please Press Continue</p>
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleContinue}
+                    >
+                      Continue
+                    </Button>
+                  </Link>
                 </CacheRoute>
               </div>
             </CacheSwitch>
@@ -74,6 +89,21 @@ function App() {
               <Route exact path="/home">
                 <UserAppBar />
                 <Home />
+                <Grow in>
+                  <Container>
+                    <Grid
+                      className={classes.mainContainer}
+                      container
+                      justify="space-between"
+                      alignItems="stretch"
+                      spacing={4}
+                    >
+                      <Grid item xs={12} sm={10}>
+                        <Posts setcurrentId={setcurrentId} />
+                      </Grid>
+                    </Grid>
+                  </Container>
+                </Grow>
                 <Footer />
               </Route>
             </Switch>
