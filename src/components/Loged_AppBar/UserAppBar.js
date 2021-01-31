@@ -22,6 +22,8 @@ import logo from "../../images/logo_transparent.png";
 import { useHistory } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import UserStore from "../../stores/UserStore";
+import { useDispatch } from "react-redux";
+import {getPosts} from "../../action/users";
 
 const drawerWidth = 240;
 
@@ -92,6 +94,7 @@ export default function UserAppBar() {
 
   const history = useHistory();
   const navigateTo = (path) => history.push(`/${path}`);
+  const dispatch = useDispatch();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -99,6 +102,10 @@ export default function UserAppBar() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const handlegetPosts = () =>{
+    dispatch(getPosts());
   };
 
   const handleAuth = () => {
@@ -163,19 +170,19 @@ export default function UserAppBar() {
         <Divider />
 
         <List>
-          <ListItem button component={Link} to="/home">
+          <ListItem button component={Link} to="/home" onClick={handlegetPosts}> 
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
             <ListItemText>Home</ListItemText>
           </ListItem>
-          <ListItem button component={Link} to="/">
+          <ListItem button component={Link} to="/movies">
             <ListItemIcon>
               <MovieIcon />
             </ListItemIcon>
             <ListItemText>Movies</ListItemText>
           </ListItem>
-          <ListItem button component={Link} to="/">
+          <ListItem button component={Link} to="/tvseries">
             <ListItemIcon>
               <TvIcon />
             </ListItemIcon>

@@ -6,6 +6,10 @@ const post = (posts=[], action) => {
             return posts.map((post) => post._id===action.payload._id ? action.payload : post);
         case 'UNLIKE':
             return posts.map((post) => post._id===action.payload._id ? action.payload : post);
+        case 'GETMOVIES':
+            return  action.payload;
+        case 'GETVSERIES':
+            return  action.payload;
         default :
             return posts;
     }

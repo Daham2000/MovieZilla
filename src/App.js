@@ -18,6 +18,8 @@ import { getPosts } from "./action/users";
 import { Grow, Grid, Container } from "@material-ui/core";
 import Posts from "./components/Posts/Posts";
 import Home from './components/Home/Home';
+import Movie from './components/Movies/Movie';
+import Tvseries from './components/Tvseries/Tvseries';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -86,6 +88,7 @@ function App() {
             </CacheSwitch>
 
             <Switch>
+
               <Route exact path="/home">
                 <UserAppBar />
                 <Home />
@@ -106,6 +109,49 @@ function App() {
                 </Grow>
                 <Footer />
               </Route>
+
+              <Route exact path="/movies">
+                <UserAppBar />
+                <Movie />
+                <Grow in>
+                  <Container>
+                    <Grid
+                      className={classes.mainContainer}
+                      container
+                      justify="space-between"
+                      alignItems="stretch"
+                      spacing={4}
+                    >
+                      <Grid item xs={12} sm={10}>
+                        <Posts setcurrentId={setcurrentId} />
+                      </Grid>
+                    </Grid>
+                  </Container>
+                </Grow>
+                <Footer />
+              </Route>
+
+              <Route exact path="/tvseries">
+                <UserAppBar />
+                <Tvseries />
+                <Grow in>
+                  <Container>
+                    <Grid
+                      className={classes.mainContainer}
+                      container
+                      justify="space-between"
+                      alignItems="stretch"
+                      spacing={4}
+                    >
+                      <Grid item xs={12} sm={10}>
+                        <Posts setcurrentId={setcurrentId} />
+                      </Grid>
+                    </Grid>
+                  </Container>
+                </Grow>
+                <Footer />
+              </Route>
+
             </Switch>
           </BrowserRouter>
         </div>

@@ -1,5 +1,5 @@
 import * as api from "../api/index";
-import { SIGNUP, LOGIN, FETCH_ALL, LIKE,UNLIKE, IFLIKED } from "../constants/actionType";
+import { SIGNUP, LOGIN, FETCH_ALL, LIKE,UNLIKE, IFLIKED,GETMOVIES, GETVSERIES } from "../constants/actionType";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserStore from "../stores/UserStore";
@@ -94,6 +94,24 @@ export const unlikePost = (id) => async (dispatch) => {
   try {
     const { data } = await api.unlikePost(id);
     dispatch({ type: UNLIKE, payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getMovies = () => async (dispatch) => {
+  try {
+    const { data } = await api.getMovies();
+    dispatch({type: GETMOVIES , payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getTvSeries = () => async (dispatch) => {
+  try {
+    const { data } = await api.getTvSeries();
+    dispatch({type: GETVSERIES , payload: data });
   } catch (error) {
     console.log(error);
   }
