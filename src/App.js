@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import GuestView from "./components/GuestView/GuestView";
 import Footer from "./components/Footer/footer";
 import ReactDOM from "react-dom";
-import { BrowserRouter, Switch, Link, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, Redirect } from "react-router-dom";
 import SignUp from "./components/Signup/Signup";
 import AppBar from "./components/App_bar/app_bar";
 import Login from "./components/Login/Login";
@@ -12,14 +12,14 @@ import { observer } from "mobx-react";
 import LinearProgress from "@material-ui/core/LinearProgress";
 import Button from "@material-ui/core/Button";
 import UserAppBar from "./components/Loged_AppBar/UserAppBar";
-import CacheRoute, { CacheSwitch } from "react-router-cache-route";
 import { useDispatch } from "react-redux";
 import { getPosts } from "./action/users";
 import { Grow, Grid, Container } from "@material-ui/core";
 import Posts from "./components/Posts/Posts";
-import Home from './components/Home/Home';
-import Movie from './components/Movies/Movie';
-import Tvseries from './components/Tvseries/Tvseries';
+import Home from "./components/Home/Home";
+import Movie from "./components/Movies/Movie";
+import Tvseries from "./components/Tvseries/Tvseries";
+import Cookies from "js-cookie";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -43,7 +43,16 @@ function App() {
 
   useEffect(() => {
     document.title = "Welcome to MovieZilla - Movie Reviews and rates";
+    readCookies();
   }, []);
+
+  const readCookies = () =>{
+    const user = Cookies.get('user');
+    if(user){
+      UserStore.isLoggedin=true;
+      UserStore.email = user;
+    }
+  };
 
   const [hidden, setHidden] = useState(false);
   const dispatch = useDispatch();
@@ -65,30 +74,31 @@ function App() {
     );
   } else {
     if (UserStore.isLoggedin === true) {
+      Cookies.set('user', UserStore.email, { expires: 1 });
+
       return (
         <div>
           <BrowserRouter>
-            <CacheSwitch>
-              <div hidden={hidden}>
-                <CacheRoute>
-                  <Link to="/home" className={classes.link}>
-                    <p hidden={hidden}> &nbsp; Hello, {UserStore.userName}</p>
-                    <p hidden={hidden}>Your login operation is successful</p>
-                    <p hidden={hidden}>Please Press Continue</p>
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleContinue}
-                    >
-                      Continue
-                    </Button>
-                  </Link>
-                </CacheRoute>
-              </div>
-            </CacheSwitch>
+            <div hidden={hidden}>
+              <Redirect
+                to="/home"
+                className={classes.link}
+                onClick={handleContinue}
+              >
+                <p hidden={hidden}> &nbsp; Hello, {UserStore.userName}</p>
+                <p hidden={hidden}>Your login operation is successful</p>
+                <p hidden={hidden}>Please Press Continue</p>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  onClick={handleContinue}
+                >
+                  Continue
+                </Button>
+              </Redirect>
+            </div>
 
             <Switch>
-
               <Route exact path="/home">
                 <UserAppBar />
                 <Home />
@@ -151,12 +161,11 @@ function App() {
                 </Grow>
                 <Footer />
               </Route>
-
             </Switch>
           </BrowserRouter>
         </div>
       );
-    } else {
+    }else {
       return (
         <div className={classes.root}>
           <BrowserRouter>
@@ -175,6 +184,9 @@ function App() {
                 <AppBar />
                 <Login />
                 <Footer />
+              </Route>
+              <Route exact path="/*">
+                <Redirect to="/login"></Redirect>
               </Route>
             </Switch>
           </BrowserRouter>

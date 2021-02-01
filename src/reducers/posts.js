@@ -3,7 +3,7 @@ const post = (posts=[], action) => {
         case 'FETCH_ALL':
             return  action.payload;
         case 'LIKE':
-            return posts.map((post) => post._id===action.payload._id ? action.payload : post);
+            return posts;
         case 'UNLIKE':
             return posts.map((post) => post._id===action.payload._id ? action.payload : post);
         case 'GETMOVIES':

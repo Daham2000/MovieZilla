@@ -84,7 +84,7 @@ export const isAlreadyLike = (id,email) =>async(dispatch) =>{
 export const likePost = (id,email) => async (dispatch) => {
   try {
     const { data } = await api.likePost(id,email);
-    dispatch({ type: LIKE, payload: data.updatedPost});
+    dispatch({ type: LIKE, payload: data});
   } catch (error) {
     console.log(error);
   }

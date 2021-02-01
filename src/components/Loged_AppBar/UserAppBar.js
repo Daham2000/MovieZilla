@@ -1,4 +1,4 @@
-import React,{useEffect} from "react";
+import React, { useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -23,7 +23,8 @@ import { useHistory } from "react-router-dom";
 import MenuIcon from "@material-ui/icons/Menu";
 import UserStore from "../../stores/UserStore";
 import { useDispatch } from "react-redux";
-import {getPosts} from "../../action/users";
+import { getPosts } from "../../action/users";
+import Cookies from "js-cookie";
 
 const drawerWidth = 240;
 
@@ -103,17 +104,21 @@ export default function UserAppBar() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
+  
 
-  const handlegetPosts = () =>{
+  const handlegetPosts = () => {
     dispatch(getPosts());
   };
 
+
   const handleAuth = () => {
-    UserStore.isLoggedin=false;
-    UserStore.email="";
-    UserStore.userName="";
+    UserStore.isLoggedin = false;
+    UserStore.email = "";
+    UserStore.userName = "";
     navigateTo("");
+    Cookies.remove("user");
   };
+
 
   useEffect(() => {
     document.title = "MovieZilla - Movie Reviews.Rates and Trailer";
@@ -170,7 +175,7 @@ export default function UserAppBar() {
         <Divider />
 
         <List>
-          <ListItem button component={Link} to="/home" onClick={handlegetPosts}> 
+          <ListItem button component={Link} to="/home" onClick={handlegetPosts}>
             <ListItemIcon>
               <HomeIcon />
             </ListItemIcon>
