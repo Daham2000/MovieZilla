@@ -12,7 +12,7 @@ import { CookiesProvider } from 'react-cookie';
 const store=createStore(reducers, compose(applyMiddleware(thunk)))
 
 ReactDOM.render(
- 
+
   <Provider store={store}>
   <CookiesProvider>
       <App />
