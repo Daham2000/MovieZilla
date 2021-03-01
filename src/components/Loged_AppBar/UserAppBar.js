@@ -193,11 +193,11 @@ export default function UserAppBar() {
             </ListItemIcon>
             <ListItemText>Tv series</ListItemText>
           </ListItem>
-          <ListItem button component={Link} to="/">
+          <ListItem button component={Link} to="/hollywood">
             <ListItemIcon>
               <MovieIcon />
             </ListItemIcon>
-            <ListItemText>Hoillyhood Movies</ListItemText>
+            <ListItemText>Hoillyhood Movies and news</ListItemText>
           </ListItem>
         </List>
 

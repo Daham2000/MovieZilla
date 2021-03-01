@@ -6,3 +6,4 @@ export const UNLIKE='UNLIKE';
 export const IFLIKED='IFLIKED';
 export const GETMOVIES='GETMOVIES';
 export const GETVSERIES='GETVSERIES';
+export const GETHOLLYWOOD = "GETHOLLYWOOD";

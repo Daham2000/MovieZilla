@@ -19,7 +19,7 @@ import HomeIcon from '@material-ui/icons/Home';
 import MovieIcon from '@material-ui/icons/Movie';
 import TvIcon from '@material-ui/icons/Tv';
 import logo from '../../images/logo_transparent.png';
-import { useHistory } from "react-router-dom"; 
+import { useHistory } from "react-router-dom";
 import MenuIcon from '@material-ui/icons/Menu';
 import UserStore from "../../stores/UserStore";
 
@@ -33,7 +33,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     fontFamily: 'Raleway'
   },
-  link:{
+  link: {
     textDecoration: "none",
     color: "white"
   },
@@ -74,14 +74,14 @@ const useStyles = makeStyles((theme) => ({
     }),
     marginLeft: 0,
   },
-  sectionDrawer:{
+  sectionDrawer: {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
     justifyItems: 'flex-start'
   },
-  imgs:{
-    width:150
+  imgs: {
+    width: 150
   }
 
 }));
@@ -102,11 +102,11 @@ const App_bar = () => {
     setOpen(false);
   };
 
-  
+
 
   const handleAuth = () => {
-  
-    if(UserStore.isLoggedin===true) {
+
+    if (UserStore.isLoggedin === true) {
       navigateTo("");
     } else {
       navigateTo("login");
@@ -115,7 +115,7 @@ const App_bar = () => {
   }
 
   return (
-    
+
     <div>
       <AppBar position="static">
         <Toolbar>
@@ -133,7 +133,7 @@ const App_bar = () => {
           </Typography>
 
           <Link className={classes.link}>
-              <Button id="logBtn" onClick={handleAuth} color="inherit" type="button">Login</Button>
+            <Button id="logBtn" onClick={handleAuth} color="inherit" type="button">Login</Button>
           </Link>
 
           <Link to="/signup" className={classes.link}>
@@ -144,60 +144,60 @@ const App_bar = () => {
         </Toolbar>
       </AppBar>
 
-          <Drawer
-            className={classes.drawer}
-            variant="persistent"
-            anchor="left"
-            open={open}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-          >
-            <div className={classes.drawerHeader}>
-              <IconButton onClick={handleDrawerClose}>
-                {theme.direction === "ltr" ? (
-                  <ChevronLeftIcon />
-                ) : (
-                  <ChevronRightIcon />
-                )}
-              </IconButton>
-            </div>
-            <Divider />
+      <Drawer
+        className={classes.drawer}
+        variant="persistent"
+        anchor="left"
+        open={open}
+        classes={{
+          paper: classes.drawerPaper,
+        }}
+      >
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === "ltr" ? (
+              <ChevronLeftIcon />
+            ) : (
+                <ChevronRightIcon />
+              )}
+          </IconButton>
+        </div>
+        <Divider />
 
-            <List>
-              <ListItem button component={Link} to="/">
-                <ListItemIcon>
-                  <HomeIcon />
-                </ListItemIcon>
-                <ListItemText>Home</ListItemText>
-              </ListItem>
-              <ListItem button component={Link} to="/">
-                <ListItemIcon>
-                  <MovieIcon />
-                </ListItemIcon>
-                <ListItemText>Movies</ListItemText>
-              </ListItem>
-              <ListItem button component={Link} to="/">
-                <ListItemIcon>
-                  <TvIcon />
-                </ListItemIcon>
-                <ListItemText>Tv series</ListItemText>
-              </ListItem>
-              <ListItem button component={Link} to="/">
-                <ListItemIcon>
-                  <MovieIcon />
-                </ListItemIcon>
-                <ListItemText>Hoillyhood Movies</ListItemText>
-              </ListItem>
-            </List>
+        <List>
+          <ListItem button component={Link} to="/">
+            <ListItemIcon>
+              <HomeIcon />
+            </ListItemIcon>
+            <ListItemText>Home</ListItemText>
+          </ListItem>
+          <ListItem button component={Link} to="/">
+            <ListItemIcon>
+              <MovieIcon />
+            </ListItemIcon>
+            <ListItemText>Movies</ListItemText>
+          </ListItem>
+          <ListItem button component={Link} to="/">
+            <ListItemIcon>
+              <TvIcon />
+            </ListItemIcon>
+            <ListItemText>Tv series</ListItemText>
+          </ListItem>
+          <ListItem button component={Link} to="/">
+            <ListItemIcon>
+              <MovieIcon />
+            </ListItemIcon>
+            <ListItemText>Hoillyhood Movies</ListItemText>
+          </ListItem>
+        </List>
 
-            <Divider />
+        <Divider />
 
-            <div className={classes.sectionDrawer}>
-              <img alt="Logo" src={logo} className={classes.imgs}></img>
-            </div>
-          </Drawer>
-      </div>
+        <div className={classes.sectionDrawer}>
+          <img alt="Logo" src={logo} className={classes.imgs}></img>
+        </div>
+      </Drawer>
+    </div>
   );
 };
 

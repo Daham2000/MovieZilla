@@ -10,3 +10,4 @@ export const unlikePost = (id) => axios.patch(`${url}/${id}/unlikePost`);
 export const isAlreadyExit = (id,email) => axios.get(`${url}/${id}/${email}/ifAlreadyLiked`);
 export const getMovies = () => axios.get(`${url}/getMovies`);
 export const getTvSeries = () => axios.get(`${url}/getTvSeries`);
+export const getHollywood = () => axios.get(`${url}/getHollyhood`);

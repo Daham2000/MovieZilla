@@ -1,5 +1,5 @@
 import * as api from "../api/index";
-import { SIGNUP, LOGIN, FETCH_ALL, LIKE,UNLIKE, IFLIKED,GETMOVIES, GETVSERIES } from "../constants/actionType";
+import { SIGNUP, LOGIN, FETCH_ALL, LIKE,UNLIKE, IFLIKED,GETMOVIES, GETVSERIES, GETHOLLYWOOD } from "../constants/actionType";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import UserStore from "../stores/UserStore";
@@ -112,6 +112,15 @@ export const getTvSeries = () => async (dispatch) => {
   try {
     const { data } = await api.getTvSeries();
     dispatch({type: GETVSERIES , payload: data });
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const getHollywood = () => async (dispatch) => {
+  try {
+    const {data} = await api.getHollywood();
+    dispatch({type: GETHOLLYWOOD, payload: data});
   } catch (error) {
     console.log(error);
   }
